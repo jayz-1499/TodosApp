@@ -1,0 +1,28 @@
+.container {
+}
+h1 {
+    text-align: center;
+    font-size: 50px;
+    font-style: oblique;
+    color:bisque;
+}
+.content {
+    width: 50%;
+    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.form {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.item {
+    width: 100%;
+    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

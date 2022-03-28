@@ -1,0 +1,26 @@
+.list-item {
+    height: 50px;
+    border: 1px solid black;
+    color: white;
+    display: flex;
+    background-color: grey;
+    justify-content: space-between;
+    margin-top:5px;
+    font-size: large;
+    
+}
+.list-container{
+}
+.list-group{
+    position: relative;
+}
+.hide-item{
+    display: none;
+}
+.decorator{
+    text-decoration:line-through;
+}
+.check-box{
+    width: 20px;
+    height: 20px;
+}

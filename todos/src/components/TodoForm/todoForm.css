@@ -1,0 +1,8 @@
+.input-todo {
+    width: 98%;
+    height: 50px;
+    font-size:large;
+}
+.form-container {
+    display: flex;
+}
