@@ -3,6 +3,9 @@ import TodoList from '../TodoList/todoList';
 import TodoForm from '../TodoForm/todoForm';
 import './todoApp.css';
 import TodoFooter from '../TodoFooter/todoFooter';
+import { useSelector, useDispatch } from 'react-redux';
+import {add,remove} from '../../redux/Slice/todoSlice';
+import {todoListRemainingSelector} from '../../redux/Selector/todoListSelector';
 function TodoApp(props) {
   const [leftItem, setLeftItem] = useState();
   const [globalCheck, setGlobalCheck] = useState(false);
@@ -96,6 +99,8 @@ function TodoApp(props) {
     //setMainTodoList(newTodoList);
     localStorage.setItem('todoList', JSON.stringify(newTodoList));
   };
+   const dispatch = useDispatch();
+   const newList = useSelector(todoListRemainingSelector);
   return (
     <div className="container">
       <h1>TODOS</h1>
@@ -105,7 +110,7 @@ function TodoApp(props) {
         </div>
         <div className="item">
           <TodoList
-            todos={todoList}
+            todos={mainTodoList}
             onTodoClick={handleToDoClick}
             handleStatus={handleCheckEachItem}
             status={globalCheck}
@@ -120,8 +125,7 @@ function TodoApp(props) {
               clear={handleFilter}
             />
           )}
-        </div>
-        <h1>LOLOLOLOLOL</h1>
+        </div> 
       </div>
     </div>
   );
