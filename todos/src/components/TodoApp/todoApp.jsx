@@ -8,7 +8,9 @@ function TodoApp(props) {
   const [globalCheck, setGlobalCheck] = useState(false);
   const [typeAction, setTypeAction] = useState('');
   const [checkFilter, setCheckFilter] = useState();
-  const [mainTodoList, setMainTodoList] = useState(JSON.parse(localStorage.getItem('todoList')));
+  const [mainTodoList, setMainTodoList] = useState(
+    JSON.parse(localStorage.getItem('todoList'))
+  );
   const [todoList, setTodoList] = useState(mainTodoList);
   const handleToDoClick = (todo) => {
     console.log(todo);
@@ -53,7 +55,6 @@ function TodoApp(props) {
     setTodoList(newTodoList);
     setMainTodoList(newTodoList);
     localStorage.setItem('todoList', JSON.stringify(newTodoList));
-
   };
 
   const handleFilter = (type) => {
@@ -69,7 +70,6 @@ function TodoApp(props) {
       const filterArr = mainTodoList.filter((item) => item.status === false);
       setTodoList(filterArr);
       console.log(mainTodoList);
-      
     }
     if (type === 'COMPLETED') {
       setTypeAction(type);
@@ -121,6 +121,7 @@ function TodoApp(props) {
             />
           )}
         </div>
+        <h1>LOLOLOLOLOL</h1>
       </div>
     </div>
   );
