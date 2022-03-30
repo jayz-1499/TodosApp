@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import uuid from '../../../node_modules/uuid/dist/v4';
 import './todoForm.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { add, remove } from '../../redux/Slice/todoSlice';
+import { add, remove, checkAll } from '../../redux/Slice/todoSlice';
 
 function TodoForm(props) {
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
+  const [allStatus, setAllStatus] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +17,6 @@ function TodoForm(props) {
       id: uuid(),
       content: value.trim(),
       status: false,
-
     };
     let reg = /(.|\s)*\S(.|\s)*/g;
     if (formValues.content.trim().match(reg)) {
@@ -25,13 +25,15 @@ function TodoForm(props) {
       setValue('');
     }
   };
-  console.log(value);
+  const handleStatus = () => {
+    setAllStatus(!allStatus);
+    dispatch(checkAll(allStatus));
+  };
 
- 
   return (
     <div>
       <form className="form-container" onSubmit={handleSubmit}>
-        <input type="button" value="↓" />
+        <input type="button" value="↓" onClick={handleStatus} />
         <input
           type="text"
           className="input-todo"

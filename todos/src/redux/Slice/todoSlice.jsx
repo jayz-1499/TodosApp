@@ -11,8 +11,9 @@ const todoListSlice = createSlice({
       state.newList.push(action.payload);
     },
     remove: (state, action) => {
-      const index = action.payload;      
-      return state.newList.filter((item) => item.id !== index);
+      const index = action.payload;
+      const newac = state.newList.filter((item) => item.id !== index);
+      state.newList = newac;
     },
     updateStatus: (state, action) => {
       state.newList.forEach((item) => {
@@ -31,9 +32,23 @@ const todoListSlice = createSlice({
         }
       });
     },
+    checkAll: (state, action) => {
+      state.newList.forEach((item) => {
+        if (item.id === action.payload.id) {
+          item.content = action.payload.content;
+        }
+      });
+    },
   },
 });
 
 const { actions, reducer } = todoListSlice;
-export const { add, remove, updateStatus, filterTodo, updateContent } = actions;
+export const {
+  add,
+  remove,
+  updateStatus,
+  filterTodo,
+  updateContent,
+  checkAll,
+} = actions;
 export default reducer;
