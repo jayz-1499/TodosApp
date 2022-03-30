@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './todoFooter.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterTodo } from '../../redux/Slice/todoSlice';
+import { filterTodo, clearAllTodo } from '../../redux/Slice/todoSlice';
 
 function TodoFooter(props) {
   const dispatch = useDispatch();
@@ -10,7 +10,10 @@ function TodoFooter(props) {
   const itemleft = newList.filter((item) => item.status === false);
 
   const handleFilter = (type1) => {
-    dispatch(filterTodo(type1));    
+    dispatch(filterTodo(type1));
+  };
+  const clearAll = () => {
+    dispatch(clearAllTodo(false));
   };
   return (
     <div className="todoFooter-container">
@@ -31,9 +34,10 @@ function TodoFooter(props) {
         />
       </div>
       <div>
-        <input type="button" value="Clear" />
+        <input type="button" value="Clear" onClick={clearAll} />
       </div>
     </div>
+    
   );
 }
 

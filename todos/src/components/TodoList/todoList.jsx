@@ -88,6 +88,7 @@ function TodoList(props) {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 onKeyPress={(e) => handleKeyPress(e, todo.id, content)}
+                autoFocus
               />
             )}
           </div>

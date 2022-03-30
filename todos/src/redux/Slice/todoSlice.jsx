@@ -34,10 +34,14 @@ const todoListSlice = createSlice({
     },
     checkAll: (state, action) => {
       state.newList.forEach((item) => {
-        if (item.id === action.payload.id) {
-          item.content = action.payload.content;
-        }
+        item.status = action.payload;
       });
+    },
+    clearAllTodo: (state, action) => {
+      const newac = state.newList.filter(
+        (item) => item.status === action.payload
+      );
+      state.newList = newac;
     },
   },
 });
@@ -50,5 +54,6 @@ export const {
   filterTodo,
   updateContent,
   checkAll,
+  clearAllTodo,
 } = actions;
 export default reducer;
