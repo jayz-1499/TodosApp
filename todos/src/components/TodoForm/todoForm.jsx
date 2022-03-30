@@ -2,53 +2,44 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import uuid from '../../../node_modules/uuid/dist/v4';
 import './todoForm.css';
-TodoForm.propTypes = {
-  onSubmit: PropTypes.func,
-  onChecked: PropTypes.func,
-};
-TodoForm.defaultProps = {
-  onSubmit: null,
-  onChecked: null,
-};
+import { useSelector, useDispatch } from 'react-redux';
+import { add, remove } from '../../redux/Slice/todoSlice';
+
 
 function TodoForm(props) {
-  const { onSubmit, onChecked } = props;
-  const [value, setValue] = useState('');
-  const [allStatus, setAllStatus] = useState(true);
-  const handleValueChange = (e) => {
-    setValue(e.target.value);
-  };
+  const dispatch = useDispatch();
+  const newList = useSelector((state) => state.todoList);
+  const [value,setValue] = useState('');
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!onSubmit) return;
-    const formValues = {
-      id: uuid(),
-      content: value.trim(),
-      status: false,
-      hide: false,
-    };
-
-    let reg = /(.|\s)*\S(.|\s)*/g;
-    if (formValues.content.trim().match(reg)) {
-      onSubmit(formValues);
-      setValue('');
+    if(e.Key === 'Enter'){
+      const formValues = {
+        id: uuid(),
+        content: value.trim(),
+        status: false,
+      };
+      let reg = /(.|\s)*\S(.|\s)*/g;
+      if (formValues.content.trim().match(reg)) {
+        const action = add(formValues);
+        dispatch(action);
+        setValue('');
+      }
     }
   };
-  const handleStatus = () => {
-    setAllStatus(!allStatus);
-    if (!onChecked) return;
-    onChecked(allStatus);
-  };
+  console.log(value);
+  
+  
+  // const handleStatus = () => {
+  //   setAllStatus(!allStatus);
+  //   if (!onChecked) return;
+  //   onChecked(allStatus);
+  // };
   return (
     <div>
-      <form className="form-container" onSubmit={handleSubmit}>
-        <input type="button" value="↓" onClick={handleStatus} />
-        <input
-          type="text"
-          className="input-todo"
-          value={value}
-          onChange={handleValueChange}
-        />
+      <form className="form-container">
+        <input type="button" value="↓" />
+        <input type="text" className="input-todo" onChange={(e)=>setValue(e.target.value)} onKeyPress={handleSubmit}/>
       </form>
     </div>
   );
