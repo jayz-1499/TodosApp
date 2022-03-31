@@ -15,6 +15,9 @@ function TodoFooter(props) {
   const clearAll = () => {
     dispatch(clearAllTodo(false));
   };
+  if (!newList.length) {
+    return null;
+  }
   return (
     <div className="todoFooter-container">
       <div>
@@ -37,7 +40,6 @@ function TodoFooter(props) {
         <input type="button" value="Clear" onClick={clearAll} />
       </div>
     </div>
-    
   );
 }
 

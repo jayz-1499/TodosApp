@@ -16,11 +16,22 @@ const todoListSlice = createSlice({
       state.newList = newac;
     },
     updateStatus: (state, action) => {
-      state.newList.forEach((item) => {
-        if (item.id === action.payload.id) {
-          item.status = action.payload.status;
+      const { newList:list1 } = state;
+       state.newList = list1.map((item) => {
+        if(item.id === action.payload.id){
+          return action.payload;
         }
-      });
+        return item;
+      })
+      // state.newList.map((item) => {
+      //   if (item.id === action.payload.id) {
+      //     //item.status = action.payload.status;
+      //     console.log('sss');
+      //     return { ...item, status: action.payload.status };
+      //   }
+      //   return item;
+      // });
+      return state;
     },
     filterTodo: (state, action) => {
       state.type = action.payload;
