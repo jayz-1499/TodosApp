@@ -9,7 +9,8 @@ function TodoForm(props) {
   const dispatch = useDispatch();
   const [value, setValue] = useState('');
   const [allStatus, setAllStatus] = useState(true);
-
+  const { newList, type } = useSelector((state) => state.todoList);
+  const itemleft = newList.filter((item) => item.status === false);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -27,7 +28,7 @@ function TodoForm(props) {
   };
   const handleStatus = () => {
     setAllStatus(!allStatus);
-    dispatch(checkAll(allStatus));
+    dispatch(checkAll( itemleft.length!== 0 ));
   };
 
   return (

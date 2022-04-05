@@ -8,7 +8,7 @@ import {
   updateStatus,
   updateContent,
 } from '../../redux/Slice/todoSlice';
-
+import { useLocation } from 'react-router-dom';
 TodoList.propTypes = {};
 TodoList.defaultProps = {};
 
@@ -46,20 +46,21 @@ function TodoList(props) {
       dispatch(action);
       sethide(false);
     }
-   
   };
-  
+  let location = useLocation();
+  console.log(location);
+
   const display = newList.filter((item) => {
-    switch (type) {
-      case 'ACTIVE':
+    switch (location.pathname) {
+      case '/Active':
         return !item.status;
-      case 'COMPLETE':
+      case '/Complete':
         return item.status;
       default:
         return true;
     }
   });
-  
+
   return (
     <div className="list-group">
       {display.map((todo) => (
